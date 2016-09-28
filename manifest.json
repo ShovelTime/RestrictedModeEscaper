@@ -1,0 +1,29 @@
+{
+  "manifest_version": 2,
+  "name": "RestrictedModeEscaper",
+  "author": "FoxInFlame",
+  "description": "Redirect to the no-cookies version of YouTube to view the restricted videos.",
+  "version": "1.0",
+  "offline_enabled": true,
+  "permissions": [
+    "https://youtube.com/*"
+  ],
+  
+  "content_scripts": [{
+    "run_at": "document_end",
+    "js": [
+      "libraries/jQuery/jquery-2.2.3.min.js",
+      "content.js"
+    ],
+    "matches": [
+      "https://www.youtube.com/*",
+      "http://www.youtube.com/*",
+      "http://youtube.com/*",
+      "https://youtube.com/*"
+    ]
+  }],
+  
+  "icons": {
+    "128": "icon.png"
+  }
+}
