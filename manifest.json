@@ -3,10 +3,10 @@
   "name": "RestrictedModeEscaper",
   "author": "FoxInFlame",
   "description": "Redirect to the no-cookies version of YouTube to view the restricted videos.",
-  "version": "1.0",
+  "version": "1.5",
   "offline_enabled": true,
   "permissions": [
-    "https://youtube.com/*"
+    "<all_urls>"
   ],
   
   "content_scripts": [{
@@ -19,7 +19,8 @@
       "https://www.youtube.com/*",
       "http://www.youtube.com/*",
       "http://youtube.com/*",
-      "https://youtube.com/*"
+      "https://youtube.com/*",
+      "<all_urls>"
     ]
   }],
   
