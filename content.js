@@ -31,11 +31,9 @@ function contentScriptIframe() {
     var height = this.clientHeight;
     var width = this.clientWidth;
     if(!src.contains("videoseries") && src.contains("youtube.com/embed")) {
-      console.log(src);
       var parts1 = src.split("/embed/");
       var parts2 = parts1[1].split("?");
-      console.log(parts2[0]);
-      $(this).replaceWith("<iframe style='height:" + height + "px;width:" + width + "px' src=\"https://www.youtube-nocookie.com/embed/" + parts2[0] + "?wmode=transparent&iv_load_policy=3&autoplay=0&html5=1&showinfo=1&rel=0&modestbranding=1&playsinline=1&theme=light\"></iframe>");
+      $(this).replaceWith("<iframe allowfullscreen='allowfullscreen' style='height:" + height + "px;width:" + width + "px' src=\"https://www.youtube-nocookie.com/embed/" + parts2[0] + "?wmode=transparent&iv_load_policy=3&autoplay=0&html5=1&showinfo=1&rel=1&modestbranding=0&playsinline=1&theme=light\"></iframe>");
     }
   });
 }
@@ -54,6 +52,6 @@ function contentScriptYouTube() {
   }
   console.log("[RME] RME has detected that this YouTube video is restricted!");
   if(confirm("This video is restricted on your device. However, you have the epic RestrictedModeEscaper installed. Click OK to watch this video.\n\nComments, descriptions, and other material related to the video will not load. Only the video will be available.")) {
-    $("#player-unavailable").html("<iframe style=\"width:100%;height:100%\" src=\"https://www.youtube-nocookie.com/embed/" + getParameterByName("v") + "?wmode=transparent&iv_load_policy=3&autoplay=1&html5=1&showinfo=1&rel=0&modestbranding=1&playsinline=1&theme=light\"></iframe>");
+    $("#player-unavailable").html("<iframe allowfullscreen='allowfullscreen' style=\"width:100%;height:100%\" src=\"https://www.youtube-nocookie.com/embed/" + getParameterByName("v") + "?wmode=transparent&iv_load_policy=3&autoplay=1&html5=1&showinfo=1&rel=1&modestbranding=0&playsinline=1&theme=light\"></iframe>");
   }
 }
