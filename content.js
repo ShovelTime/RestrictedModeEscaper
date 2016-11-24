@@ -5,25 +5,27 @@ $(document).ready(function() {
     console.log("RestrictedModeEscaper Initialized!");
         contentScriptYouTube();
 
-    return;
+     return;
   }
-  else if(window.location.href.contains("youtube") && window.location.href.contains("watch?time_continue=)) {
-    console.log("RestrictedModeEscaper Initialized!");
+ if (window.location.href.contains("youtube") && window.location.href.contains("watch?time_continue=")){
+  
+  console.log("RestrictedModeEscaper Initialized!");
         contentScriptYouTubetime();
+        
     return;
-
-  }
-                                                                                    
+   }
+               
+  
                                                                                     
   if($("iframe[src*='youtube.com']").length) {
     contentScriptIframe();
   }
 });
+
 //Main content
 String.prototype.contains = function(string) {
   return (this.indexOf(string) != -1);
 };
-
 function getParameterByName(name, url) {
     if (!url) url = window.location.href;
     name = name.replace(/[\[\]]/g, "\\$&");
@@ -66,7 +68,7 @@ function contentScriptYouTube() {
 }
 
 function contentScriptYouTubetime() {
-  if(!window.location.href.contains("youtube") || !window.location.href.contains("watch?v=")) {
+  if(!window.location.href.contains("youtube") || !window.location.href.contains("watch?time_continue=")) {
     console.info("[RME] RestrictedModeEscaper has detected that this page is not a video, and therefore has stopped its function.");
     return;
   }
@@ -78,9 +80,9 @@ function contentScriptYouTubetime() {
     console.info("[RME] RME has detected that this video is not available for another reason!");
     return;
   }
+  var p = (getParameterByName("time_continue"));
+  console.log("[RME] RME has detected that this YouTube video is restricted!" + p); //numbers after the end of the sentence represent the time start value, only necessary when debugging
+  if(confirm("This video is restricted on your device. However, you have the epic RestrictedModeEscaper installed. Click OK to watch this video.\n\nComments, descriptions, and other material related to the video will not load. Only the video will be available."))
+    $("#player-unavailable").html("<iframe allowfullscreen='allowfullscreen' style=\"width:100%;height:100%\" src=\"https://www.youtube-nocookie.com/embed/" + getParameterByName("v") + "?wmode=transparent&iv_load_policy=3&autoplay=1&html5=1&showinfo=1&rel=1&modestbranding=0&playsinline=1&theme=light&start=" + getParameterByName("time_continue") + "\"></iframe>");
   
-  console.log("[RME] RME has detected that this YouTube video is restricted!");
-  if(confirm("This video is restricted on your device. However, you have the epic RestrictedModeEscaper installed. Click OK to watch this video.\n\nComments, descriptions, and other material related to the video will not load. Only the video will be available.")) 
-    $("#player-unavailable").html("<iframe allowfullscreen='allowfullscreen' style=\"width:100%;height:100%\" src=\"https://www.youtube-nocookie.com/embed/" + getParameterByName("v") + "?wmode=transparent&iv_load_policy=3&autoplay=1&html5=1&showinfo=1&rel=1&modestbranding=0&playsinline=1&theme=light&tstart" + getParameterByName("=")\"></iframe>");
-  }
 }
